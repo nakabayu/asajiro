@@ -1,1 +1,1 @@
-web: bin/hubot -a slack -n asajiro
+web: bin/hubot -a slack --require build

@@ -1,12 +1,13 @@
+// Description:
+//   helps you to make curl command.
+
+// Commands:
+//   hubot teach curl - building curl command in coversation with bot.
+
 import Conversation from 'hubot-conversation';
 
 class CurlCommand {
     constructor() {
-        this.url = "";
-        this.width = 0;
-        this.height = 0;
-        this.device = "";
-        this.timezone = "";
     }
 
     generate() {
@@ -17,14 +18,14 @@ class CurlCommand {
 module.exports = (robot) => {
     var conversation, input_device, input_height, input_timezone, input_url, input_width, p, show_result, trim_input;
     conversation = new Conversation(robot)
-    robot.respond(/すし/, (res) => {
+    robot.respond(/createjob/, (res) => {
         var dialog;
         dialog = conversation.startDialog(res, 60000);
         dialog.timeout = function(res) {
             return res.emote('タイムアウトです');
         }
         // 対話形式スタート
-        return input_url(res, dialog);
+        return input_jobcode(res, dialog);
     });
 
     // 以下、対話式ダイアログです
@@ -34,8 +35,8 @@ module.exports = (robot) => {
     trim_input = function(str) {
         return str.trim();
     };
-    // URLの入力
-    input_url = function(res, dialog) {
+    // ジョブコードの入力
+    input_jobcode = function(res, dialog) {
         res.send('URLを教えて下さい [ 例) http://sample.com/api/sample ]');
         return dialog.addChoice(/(.+)/, function(res2) {
             p.url = trim_input(res2.match[1]);
